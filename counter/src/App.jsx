@@ -1,8 +1,18 @@
-import { useCallback, useEffect,useMemo, useState } from 'react'
+import { useCallback, useEffect,useMemo, useRef, useState } from 'react'
 
 function App() {
   const [count, setCount] = useState(0);
 const [input, setInput] = useState("");
+
+const refer=useRef(null);
+
+const handleboth = () => {
+  handleadd();
+  handleSelect();
+};
+const handleSelect = () => {
+    refer.current.select();
+  };
 
 useEffect(()=>{
   console.log("count changed");
@@ -13,8 +23,7 @@ const isEven =useMemo(()=>{
 },[count]);
 
 const handleadd = useCallback(()=>{
-  setCount(count + Number(input));
-  setCount((count)=>count +4);
+  setCount((count) => count+ Number(input));
 },[input]);
 
 const handlechange= (e)=>{
@@ -27,10 +36,9 @@ const handlechange= (e)=>{
 
       <h2>Value : {count}</h2>
 
-      <input type="number" value={input} onChange={handlechange} />
+      <input ref={refer} type="number" value={input} onChange={handlechange} />
 
-      <button onClick={handleadd}> add </button>
-      {isEven ? <h4>Even</h4> : <h4>Odd</h4>}
+      <button onClick={handleboth}> add </button>
     </>
   )
 }
