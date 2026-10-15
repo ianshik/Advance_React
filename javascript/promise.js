@@ -23,3 +23,15 @@ const x=async(()=>{
         
     }
 });
+
+const fetch=(()=>{
+    return new Promise((resolve,reject)=>{
+        const success =true;
+        if(success) {
+            resolve(success);
+        }
+        else {
+            reject(success);
+        }
+    });    
+});
